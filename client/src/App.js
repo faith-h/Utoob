@@ -24,7 +24,7 @@ const App = () => (
           <Route exact path="/login" component={Login} />
           <Route exact path="/register" component={Register} />
           <Route exact path="/videoform" component={VideoForm} />
-          <Route exact path="/videos/:video_id" component={VideoView} />
+          <Route exact path="/api/videos/:video_id" component={VideoView} />
           <Route exact path="/profile" component={Profile} />
           <Route exact path="/myvideos" component={MyVideos} />
           <Route exact path="/myfriends" component={MyFriends} />
