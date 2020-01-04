@@ -14,7 +14,7 @@ class VideoForm extends React.Component {
       axios.get(`/api/videos/${id}`)
         .then(res => {
           const {title, duration, genre, description, trailer }= res.data         
-          this.setState({title, duration, genre, description, trailer})
+          this.setState({title, duration, genre, description, trailer, })
         })
         .catch(err => {
           console.log(err.response)
@@ -47,11 +47,12 @@ class VideoForm extends React.Component {
   }
 
 
+
   render() {
     const {title, duration, genre, description, trailer } = this.state
     return (
       <Container>
-        <Form>
+        <Form onSubmit={this.handleSubmit}>
         <Form.Input
             name="title"
             placeholder="Title Name"
@@ -86,7 +87,7 @@ class VideoForm extends React.Component {
             placeholder="Trailer Url"
             value={trailer}
             onChange={this.handleChange}
-            required
+            
           />
            <Button
             inverted
