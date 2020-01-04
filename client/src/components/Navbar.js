@@ -18,7 +18,7 @@ class Navbar extends React.Component {
         <Menu.Item>
           <Image circular src={require('../images/user.png')} 
             as='a'
-            size='tiny'
+            style={{ height: '40px', width: '40px'}}
             href='localhost:3000/profile'
             // onClick={this.toggleUserView()}
             />
