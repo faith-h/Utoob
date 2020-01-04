@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios'
-import { Header, Container, Grid, Segment, Card } from 'semantic-ui-react';
+import { Header, Container, Grid, Segment } from 'semantic-ui-react';
 import { Link } from 'react-router-dom'
 
 class Home extends React.Component {
@@ -20,13 +20,9 @@ class Home extends React.Component {
     return this.state.videos.map( v => (
       <Link to={`/api/videos/${v.id}`}>
         <div style={{ padding: '60px', }}>
-        <Card>
-            <Card.Header>
+        <Segment>
+        </Segment>
               <Header as='h3'> {v.title} </Header>
-            </Card.Header>
-            <Card.Content>
-            </Card.Content>
-          </Card>
         </div>
       </Link>
     ))
