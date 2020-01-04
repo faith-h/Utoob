@@ -15,13 +15,15 @@ class Api::VideosController < ApplicationController
       render json: video
     else
       render json: video.errors, status: 422
+    end
   end
 
   def update
-    @video.update(video_params)
+    if @video.update(video_params)
     render json: @video
   else
     render json: @video.errors, status: 422
+  end
   end
 
   def destroy
@@ -35,7 +37,7 @@ class Api::VideosController < ApplicationController
   end
 
   def video_params
-    params.require(:video).permit{:title, :duration, :genre, :desc, :trailer)
+    params.require(:video).permit(:title, :duration, :genre, :desc, :trailer)
   end
 
 end
