@@ -1,6 +1,6 @@
 import React from 'react'
 import { AuthConsumer, } from "../providers/AuthProvider";
-import { Menu, Image, Button } from 'semantic-ui-react'
+import { Menu, Image, Button, Dropdown } from 'semantic-ui-react'
 import { Link, withRouter, } from 'react-router-dom'
 
 class Navbar extends React.Component {
@@ -19,16 +19,19 @@ class Navbar extends React.Component {
           <Image circular src={require('../images/user.png')} 
             as='a'
             style={{ height: '40px', width: '40px'}}
-            href='localhost:3000/profile'
-            // onClick={this.toggleUserView()}
             />
+            <Dropdown>
+          <Dropdown.Menu>
+          <Dropdown.Item text='Profile' href='/profile' />
+          <Dropdown.Item text='MyVideos' href ='/myvideos' />
+          <Dropdown.Item text='MyFriends' href ='/myfriends' />
+          <Dropdown.Divider />
+          <Dropdown.Item text='LogOut'  onClick={() => handleLogout(this.props.history)}/>
+          </Dropdown.Menu>
+          </Dropdown>
           </Menu.Item>
-          <Menu.Item
-            name='logout'
-            onClick={() => handleLogout(this.props.history)}
-          />
-        </Menu.Menu>
-        <Menu.Item>
+          </Menu.Menu>
+          <Menu.Item>
           <Button as={ Link }
             color='red'
             size='tiny'
@@ -65,20 +68,16 @@ class Navbar extends React.Component {
     return (
       <div>
         <Menu pointing secondary>
-          <Menu.Item>
+              <Menu.Item>
+            <Link to= './'>
+
           <Image src={require('../images/logo.png')} 
           as='a'
           size='small'
           href='localhost:3000/'
           />
+          </Link>
           </Menu.Item>
-          {/* <Link to='/'>
-            <Menu.Item
-              name='home'
-              id='home'
-              active={this.props.location.pathname === '/'}
-            />
-          </Link> */}
           { this.rightNavItems() }
         </Menu>
       </div>
