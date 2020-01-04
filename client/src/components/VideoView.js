@@ -1,9 +1,10 @@
 import React from 'react'
 import axios from 'axios'
+import VideoForm from './VideoForm'
 import { Header, Comment, Container, Segment, Button } from 'semantic-ui-react'
 
 class VideoView extends React.Component {
-  state = { video: {}, comments: [] }
+  state = { video: {}, comments: [], toggle: false }
 
   componentDidMount() {
     const { video_id } = this.props.match.params
@@ -21,6 +22,8 @@ class VideoView extends React.Component {
     })
   }
 
+  toggleForm = () => this.setState({ toggle: !this.state.toggle })
+  
   handleDelete = () => {
     const { video_id } = this.props.match.params
     axios.delete(`/api/videos/${video_id}`)
@@ -57,8 +60,18 @@ class VideoView extends React.Component {
         <Button onClick={this.handleDelete}>
           Delete
         </Button>
+        {/* <Button onClick={this.toggleForm()}>
+          Edit
+        </Button>
+        { this.state.toggle ?
+        <VideoForm />
+        :
+        null
+        } */}
       </Segment>
+      {this.listComments()}
     </Container>
+
     {/* // // video itself
     // // video info in segment
     //   <Container>
