@@ -2,13 +2,17 @@ import React from 'react';
 import axios from 'axios';
 import { Form, Button, Container } from 'semantic-ui-react';
 
-
-
-
 class VideoForm extends React.Component {
-  state = {title: '', duration: '', genre: '', description: '', trailer: '',  }
+  state = { videos: [], title: '', duration: '', genre: '', description: '', trailer: '',  }
 
   componentDidMount() {
+    axios.get('/api/videos')
+    .then(res => {
+      this.setState({ videos: res.data })
+    })
+    .catch(err => {
+      console.log(err.response)
+    })
     const { id } = this.props
     if (id)
       axios.get(`/api/videos/${id}`)
@@ -17,7 +21,7 @@ class VideoForm extends React.Component {
           this.setState({title, duration, genre, description, trailer, })
         })
         .catch(err => {
-          console.log(err.response)
+          console.log(err)
         })
   }
 
@@ -29,19 +33,16 @@ class VideoForm extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault()
     const video = { ...this.state }
-    const { id, update, toggleForm, } = this.props
+    const { id, update, } = this.props
     if (id) {
       axios.put(`/api/videos/${id}`, video)
         .then(res => {
           update(res.data)
-          toggleForm()
         })
     } else {
-      const { add, toggleForm, } = this.props
       axios.post('/api/videos', video)
         .then(res => {
-          add(res.data)
-          toggleForm()
+          this.setState({ videos: [res.data, ...this.state.videos] })
         })
     }
   }
@@ -94,13 +95,6 @@ class VideoForm extends React.Component {
             icon='send'
             content='Submit'
             color='green'
-          />
-          <Button
-            inverted
-            content='Cancel'
-            color='red'
-            icon='cancel'
-            onClick={() => this.props.toggleForm()}
           />
         </Form>
       </Container>

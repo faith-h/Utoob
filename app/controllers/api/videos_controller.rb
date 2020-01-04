@@ -10,14 +10,22 @@ class Api::VideosController < ApplicationController
   end
 
   def create
-    video = Video.new(video_params)
-
-    if video.save
-      render json: video
+    @video = current_user.videos.new(video_params)
+    if @video.save
+      render json: @video
     else
-      render json: video.errors, status: 422
+      render json: @video.errors
     end
   end
+      
+  #   video = Video.new(video_params)
+
+  #   if video.save
+  #     render json: video
+  #   else
+  #     render json: @video.errors, status: 422
+  #   end
+  # end
 
   def update
     if @video.update(video_params)

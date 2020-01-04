@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios'
+import VideoForm from './VideoForm'
 import { Header, Container, Grid, Segment } from 'semantic-ui-react';
 import { Link } from 'react-router-dom'
 
@@ -30,6 +31,7 @@ class Home extends React.Component {
 
   render() {
     return (
+      <>
   <Container>
     <br />
   <Header as="h3" textAlign="left">All Videos</Header>
@@ -41,6 +43,7 @@ class Home extends React.Component {
       </Grid.Row>
     </Grid>
   </Container>
+  </>
     )
   }
 }
