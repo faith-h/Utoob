@@ -1,18 +1,18 @@
 import React from 'react'
 import axios from 'axios'
-import { Header, Comment } from 'semantic-ui-react'
+import { Header, Comment, Container, Segment, Button } from 'semantic-ui-react'
 
 class VideoView extends React.Component {
-  state = { video: [], comments: [] }
+  state = { video: {}, comments: [] }
 
   componentDidMount() {
-    const { id } = this.props.match.params
-    axios.get(`/api/videos/${id}`)
+    const { video_id } = this.props.match.params
+    axios.get(`/api/videos/${video_id}`)
     .then(res => {
       this.setState({ video: res.data })
     })
 
-    axios.get(`/api.videos/${id}/comments`)
+    axios.get(`/api/videos/${video_id}/comments`)
     .then( res => {
       this.setState({ items: res.data })
     })
@@ -21,8 +21,15 @@ class VideoView extends React.Component {
     })
   }
 
+  handleDelete = () => {
+    const { video_id } = this.props.match.params
+    axios.delete(`/api/videos/${video_id}`)
+    .then(res => {
+      this.props.history.push('/')
+  })
+}
+
   listComments = () => {
-    const { id } = this.props.match.params
     return this.state.comments.map( c => (
       <Comment.Group>
         <Header as='h3' dividing>
@@ -41,9 +48,17 @@ class VideoView extends React.Component {
   }
 
   render() {
-    const { video: {id, title}} = this.state
+    const { video } = this.state
     return( 
     <>
+    <Container>
+      <Segment>
+        { video.title }
+        <Button onClick={this.handleDelete}>
+          Delete
+        </Button>
+      </Segment>
+    </Container>
     {/* // // video itself
     // // video info in segment
     //   <Container>

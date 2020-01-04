@@ -1,7 +1,7 @@
 import React from 'react';
-// import axios from 'axios'
-import { Header, Grid, Image, } from 'semantic-ui-react';
-// import { Link } from 'react-router-dom'
+import axios from 'axios'
+import { Header, Container, Grid, Image, Segment } from 'semantic-ui-react';
+import { Link } from 'react-router-dom'
 
 const Home = () => (
 <>
