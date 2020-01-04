@@ -69,7 +69,7 @@ class Navbar extends React.Component {
           <Image src={require('../images/logo.png')} 
           as='a'
           size='small'
-          href='localhost:3000'
+          href='localhost:3000/'
           />
           </Menu.Item>
           {/* <Link to='/'>
