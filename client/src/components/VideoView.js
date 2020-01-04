@@ -57,6 +57,15 @@ class VideoView extends React.Component {
     <Container>
       <Segment>
         { video.title }
+
+        { this.state.toggle ?
+          <VideoForm />
+          :
+          <Button onClick={() => this.toggleForm()}>
+            Edit
+          </Button>
+        }
+
         <Button onClick={this.handleDelete}>
           Delete
         </Button>
